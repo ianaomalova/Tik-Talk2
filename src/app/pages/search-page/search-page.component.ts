@@ -1,25 +1,26 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, WritableSignal} from '@angular/core';
 import {ProfileCardComponent} from '../../common-ui/profile-card/profile-card.component';
 import {ProfileService} from '../../data/services/profile.service';
 import {Profile} from '../../data/interfaces/profile.interface';
+import {ProfileFiltersComponent} from './profile-filters/profile-filters.component';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
   imports: [
-    ProfileCardComponent
+    ProfileCardComponent,
+    ProfileFiltersComponent,
+    AsyncPipe
   ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
 })
 export class SearchPageComponent {
   profileService: ProfileService = inject(ProfileService);
-  profiles: Profile[] = [];
+  profiles = this.profileService.filteredProfiles;
 
   constructor() {
-    this.profileService.getTestsAccounts().subscribe(result => {
-      this.profiles = result;
-      console.log(this.profiles);
-    })
+
   }
 }

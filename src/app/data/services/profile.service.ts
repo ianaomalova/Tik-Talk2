@@ -9,7 +9,8 @@ import {map, Observable, tap} from 'rxjs';
 })
 export class ProfileService {
   baseUrl: string = 'https://icherniakov.ru/yt-course/';
-  me = signal<Profile | null>(null)
+  me = signal<Profile | null>(null);
+  filteredProfiles = signal<Profile[]>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -45,5 +46,16 @@ export class ProfileService {
     const fd = new FormData();
     fd.append('image', file);
     return this.http.post<Profile>(`${this.baseUrl}account/upload_image`, fd)
+  }
+
+  filterProfiles(params: Record<string, any>) {
+    return this.http.get<Pageable<Profile>>(`${this.baseUrl}account/accounts`, {
+        params
+      }
+    ).pipe(
+      tap(value => {
+        this.filteredProfiles.set(value.items);
+      })
+    );
   }
 }

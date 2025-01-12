@@ -29,6 +29,9 @@
   text-align: left;
   border-radius: 2px;
   cursor: pointer;
+  &.active {
+    color: var(--primary-color);
+  }
   &:hover,
   &:focus-visible {
     background: var(--dark-hover-color);
