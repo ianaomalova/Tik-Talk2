@@ -1,0 +1,56 @@
+<img
+  src='/assets/images/svg/logo-small.svg'
+  class='ml16 mb20'
+  alt=''
+>
+
+<nav>
+  <ul class='main-menu-list'>
+    <li *ngFor='let menuItem of menuItems'>
+      <button class='menu-item'>
+        <svg [icon]='menuItem.icon'></svg>
+
+        <span>{{ menuItem.label }}</span>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<p class='medium-text mb20'>Подписчики</p>
+
+@if (subscribers$ | async) {
+  @for (profile of subscribers$ | async; track profile.id) {
+    <app-subscriber-card
+      [profile]='profile'
+    >
+    </app-subscriber-card>
+  }
+}
+
+<div class='mt20 to-subscribers'>
+  <a
+    [routerLink]="['/subscribers']"
+    class='to-subscribers-link'
+  >Все подписчики
+  </a>
+  <svg icon='arrow' class='to-subscribers-icon'></svg>
+</div>
+
+<footer class='sidebar__footer'>
+  @if (me(); as me) {
+    @if (me.avatarUrl) {
+      <img [src]='me.avatarUrl | imgUrl' alt=''>
+    } @else {
+      <img src='/assets/images/avatar.png' alt=''>
+    }
+
+    <strong class='subtitle username-text'>{{me.username}}</strong>
+
+    <a
+      [routerLink]="['/settings']"
+      class='settings-btn'
+    >
+      <svg icon='settings'></svg>
+    </a>
+  }
+</footer>
