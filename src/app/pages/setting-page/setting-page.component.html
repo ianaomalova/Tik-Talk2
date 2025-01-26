@@ -1,0 +1,50 @@
+<app-profile-header
+>
+</app-profile-header>
+<div class='profile-form-wrapper'>
+  <form class='profile-form' [formGroup]='form'>
+    <div class='two-columns'>
+      <label class='tt-form-label'>
+        <span class='tt-form-label__text'>Имя</span>
+        <input type='text' class='tt-form-input' formControlName='firstName'>
+      </label>
+
+      <label class='tt-form-label'>
+        <span class='tt-form-label__text'>Фамилия</span>
+        <input type='text' class='tt-form-input' formControlName='lastName'>
+      </label>
+    </div>
+
+    <label class='tt-form-label'>
+      <span class='tt-form-label__text'>Telegram username</span>
+      <input type='text' class='tt-form-input' formControlName='username'>
+    </label>
+
+    <label class='tt-form-label'>
+      <span class='tt-form-label__text'>О себе</span>
+      <textarea
+        class='tt-form-input tt-textarea'
+        formControlName='description'
+        rows='4'
+      >
+    </textarea>
+    </label>
+
+    <label class='tt-form-label'>
+      <span class='tt-form-label__text'>Аватар</span>
+      <app-avatar-upload></app-avatar-upload>
+    </label>
+
+    <label class='tt-form-label'>
+      <span class='tt-form-label__text'>Навыки</span>
+      <input type='text' class='tt-form-input' formControlName='stack'>
+    </label>
+  </form>
+
+  <div>
+    <div>
+      <button class='btn' (click)='saveProfileSettings()' >Сохранить</button>
+    </div>
+  </div>
+</div>
+
